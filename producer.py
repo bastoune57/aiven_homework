@@ -1,5 +1,9 @@
+# import libraries
 from kafka import KafkaProducer
+
+# import own modules
 from config import config 
+from helper_functions import generate_json_message
 
 class Producer:
     """
@@ -12,30 +16,33 @@ class Producer:
         load kafka configuration settings from config file (default host_settings.ini)
         and create a kafka producer instance 
         """
-        try:
-            # load connection parameters
-            kafka_config = config(section='kafka')
-            # create producer instance
-            self.producer = KafkaProducer(
-                security_protocol = "SSL",
-                **kafka_config,
-            )
-        except (Exception) as error:
-            print(error)
+        # load connection parameters
+        kafka_config = config(section='kafka')
+        # create producer instance
+        self.connection = KafkaProducer(
+            security_protocol = "SSL",
+            **kafka_config,
+        )
+
 
 
     def send (self):
         """
         Create messages and send them to the kafka server 
         """
+        # first check connection was succesful
         for i in range(1, 4):
-            message = "message number {}".format(i)
+            message = generate_json_message(i)
             print("Sending: {}".format(message))
-            self.producer.send('routes', message.encode("utf-8"))
+            self.connection.send('routes', message.encode("utf-8"))
         
         # Force sending of all messages        
-        self.producer.flush()
+        self.connection.flush()
 
 
-producer = Producer()
-producer.send()
+if __name__ == '__main__':
+    try:
+        producer = Producer()
+        producer.send()
+    except (Exception) as error:
+        print("\n\nProducer's connection to kafka failed with error: {}\n\n".format(error))

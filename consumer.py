@@ -1,7 +1,10 @@
-# This script receives messages from a Kafka topic
+# import libraries
 import psycopg2
-from config import config
 from kafka import KafkaConsumer
+
+# import own modules
+from config import config
+from database import Database
 
 class Consumer():
     """
@@ -41,10 +44,22 @@ class Consumer():
             raw_msgs = self.consumer.poll(timeout_ms=1000)
             for tp, msgs in raw_msgs.items():
                 for msg in msgs:
-                    print("Received: {}".format(msg.value))
-        
+                    try:
+                        # here is the per message processing
+                        validate_record_format()
+                        print("Received: {}".format(msg.value))
+                    except (Exception, ValueError) as error:
+                        print(error)
+                    #else:
+                        # XXX save to db
+                    
         # Commit offsets so we won't get the same messages again        
         self.consumer.commit()
 
-consumer = Consumer()
-consumer.poll()
+
+if __name__ == '__main__':
+    try:
+        consumer = Consumer()
+        consumer.poll()
+    except (Exception) as error:
+        print("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))

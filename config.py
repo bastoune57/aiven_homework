@@ -1,5 +1,7 @@
+'''
+this code is taken (inspired) from https://www.postgresqltutorial.com/postgresql-python/connect/
+'''
 from configparser import ConfigParser
-
 
 def config(filename='host_settings.ini', section='postgresql'):
     # create a parser
