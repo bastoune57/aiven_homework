@@ -21,6 +21,10 @@ Starting the consumer will read available records from the kafka server then pus
 python3 consumer.py
 ```
 
+## Licenses
+* [GNU] https://www.psycopg.org/docs/license.html
+* [Kafka] Apache License, v2.0. 
+
 ### Assignment
 Software Engineer in Support
 This exercise is meant as a recruiting homework for candidate’s applying for a technical position within Aiven. As Aiven is a Database As a Service vendor which takes great pride in the easy setup of our services, we’d like to see a homework regarding the use of our services in a demo application. This will help familiarize the applicant with our offered technology stack and help us evaluate the candidate’s proficiency in using the services Aiven offers.
