@@ -6,9 +6,9 @@ import json
 from producer import Producer
 from consumer import Consumer
 from database import Database
-from helper_functions import generate_json_message
+from helper_functions import generate_json_message, validate_record_format
 
-class TestAssignement(unittest.TestCase):
+class TestAssignment(unittest.TestCase):
     """
     class that will handle testing of the producer
     """
@@ -42,7 +42,7 @@ class TestAssignement(unittest.TestCase):
         """
         try:
             database = Database()
-            database.server_version()
+            database.get_server_version()
         except (Exception) as error:
             print("\n\nConnection to postgresql failed with error: {}\n\n".format(error))
             assert(False)
@@ -55,11 +55,35 @@ class TestAssignement(unittest.TestCase):
         coordinates as tuple of float
         """
         try:
-            record = generate_json_message()
-            validate_record_format(record)
+            record_str = generate_json_message()
+            validate_record_format(record_str)
         except (Exception, ValueError) as error:
             print(error)
+            assert(False)
             
+    def test_sql_insertion(self):
+        """
+        Test that the sql insertion in the database works
+        """
+        #create a valid record
+        try:
+            # generate record as from kafka server
+            record_str = generate_json_message()
+            # create corresponding sql
+            consumer = Consumer()
+            sql_str = consumer.create_sql_command(record_str)
+            # print SQL
+            print(sql_str)
+            # execute in db
+            result = consumer.execute_sql(sql_str)
+            # print all from table
+            result = consumer.get_table_content()
+            print(result)
+            # XXX a better test would be to fetch the last element and compare with the generated one
+
+        except (Exception, ValueError) as error:
+            print(error)
+            assert(False)
 
 if __name__ == '__main__':
     unittest.main()

@@ -30,19 +30,26 @@ def generate_json_message(userId=-1):
 
 def validate_record_format(record):
     """
-    function that valisates the format of the messages read from the kafka server and to be pushed to the postgresql db
+    function that validates the format of the messages read from the kafka server and to be pushed to the postgresql db
 
-    :param record: string to be checked 
+    :param record: string of json format to be checked
+    :return boolean of validity 
     """
     try:
         data = json.loads(record)
     except(ValueError) as error:
         raise Exception("The record is not from JSON format: {}".format(record))
+        return False
 
-    validate_userId (data)
-    validate_timestamp (data)
-    validate_coordinates (data)
-
+    try:
+        validate_userId (data)
+        validate_timestamp (data)
+        validate_coordinates (data)
+    except(Exception) as error:
+        print(error)
+        return False
+    
+    return True
 
 
 
@@ -130,11 +137,13 @@ def validate_coordinates (record):
     if longitude < -180 or longitude > 180:
         raise Exception ("Coordinate longitude is out of range: {} (should be between -180 and 180)".format(longitude))
 
+    
 
 if __name__ == '__main__':
     try:
         record = generate_json_message()
         validate_record_format(record)
+        create_sql_command(record, 'routes_table1')
     except (Exception, ValueError) as error:
         print(error)
 
