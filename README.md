@@ -17,6 +17,11 @@ Folder architecture is as follow:
 ```
 .
 +-- _homework
+|   +-- config.py
+|   +-- consumer.py
+|   +-- database.py
+|   +-- helper_functions.py
+|   +-- producer.py
 +-- _src
 |   +-- host_settings.ini
 |   +-- ssl
@@ -31,15 +36,30 @@ Folder architecture is as follow:
 +-- setup.py
 +-- test.py
 ```
+The main module is called **homework** and the core code is implemented in this module. The files files contain:
+* config.py: a module that read .ini files using the configParser module
+* consumer.py: a class that handles reading record from kafka server and then storing it after validation in postgrsql server.
+* database.py: a class that handles interaction Postgrsql server.
+* producer.py: a class that handles creating and sending records to the kafka server.
+* helper\_functions.py: a class contains often used functions: validation functions and generating JSON strings from records. Ideally it should move to a utils library.
 
-The main module is called **homework** and the core code is implemented in this module.
+## Homework Fonctionality
+
+The project will have a kafka producer (producer.py) and a consumer (consumer.py) that will interact with a kafka server and a postgresql database that are both hosted by Aiven. The homework implemented creates a producer that sends some random records to the kafka server. Then a consumer is created that reads the records, validate them and write them in a Postgresql database. Records are sent using a JSON formating.
+
+A record is composed of:
+* userID: as an integer value
+* timestamp: as a float value
+* coordinates: as a list of 2 values:
+	* latitude: as a float value going from -90° to 90°
+ 	* longitude: as a float value going from -180° to 180°
+
+In Postgresql the database is called **routes** and the table **routes\_table**. 
 
 ## usage
-The project will have a kafka producer (producer.py) and a consumer (consumer.py) that will interact with a kafka server and a postgresql database that are both hosted by Aiven. The homework implemented creates a producer that sends some random records to the kafka server. Then a consumer is created that reads the records, validate them and write them in a Postgresql database.
-
 Start the homework using:
 ```bash
-make start_producer
+make start_homework
 ```
 
 Start the test ptocedures using:

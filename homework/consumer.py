@@ -24,7 +24,7 @@ class Consumer(Database):
         # inheritance handling 
         Database.__init__(self)
 
-        self.table_name = "routes_table2"
+        self.table_name = "routes_table"
 
         try:
             # read kafka connection parameters
