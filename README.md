@@ -14,6 +14,7 @@ In order to obtain these filesm please contact the project manager at bastien.ha
 ## Core info about project
 Folder architecture is as follow:
 
+```
 .
 +-- _docs
 +-- _homework
@@ -31,8 +32,9 @@ Folder architecture is as follow:
 +-- requirements.txt
 +-- setup.py
 +-- test.py
+```
 
-The main module is called homework and the core code is implemented in this module.
+The main module is called **homework** and the core code is implemented in this module.
 
 ## usage
 The project will have a kafka producer (producer.py) and a consumer (consumer.py) that will interact with a kafka server and a postgresql database that are both hosted by Aiven. The homework implemented creates a producer that sends some random records to the kafka server. Then a consumer is created that reads the records, validate them and write them in a Postgresql database.
