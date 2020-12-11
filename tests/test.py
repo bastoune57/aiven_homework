@@ -3,10 +3,10 @@ import unittest
 import json
 
 # import own modules
-from producer import Producer
-from consumer import Consumer
-from database import Database
-from helper_functions import generate_json_message, validate_record_format
+from homework.producer import Producer
+from homework.consumer import Consumer
+from homework.database import Database
+from homework.helper_functions import generate_json_message, validate_record_format
 
 class TestAssignment(unittest.TestCase):
     """

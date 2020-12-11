@@ -27,4 +27,7 @@ start_consumer:
 start_database:
 	$(path_to_venv)/bin/$(python_version) $(pkg_name)/database.py
 
-start_homework: start_producer start_consumer
+run_homework: start_producer start_consumer
+
+run_all_tests: 
+

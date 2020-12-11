@@ -3,9 +3,9 @@ import psycopg2
 from kafka import KafkaConsumer
 
 # import own modules
-from config import config
-from database import Database
-from helper_functions import validate_record_format
+from homework.config import config
+from homework.database import Database
+from homework.helper_functions import validate_record_format
 
 class Consumer(Database):
     """
