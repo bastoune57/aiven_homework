@@ -1,6 +1,6 @@
 import json
 import psycopg2
-from homework.config import config
+from config import config
 
 class Database:
     """

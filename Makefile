@@ -1,4 +1,4 @@
-.PHONY: init create_venv install_venv upgrade_venv start_producer start_consumer start_database start_homework
+.PHONY: init create_venv install_pkg_homework install_venv upgrade_venv start_producer start_consumer start_database start_homework
 
 ## declare variable name
 path_to_venv=./venv
@@ -15,6 +15,9 @@ create_venv:
 
 upgrade_venv:
 	$(path_to_venv)/bin/pip install -r requirements.txt
+
+install_pkg_homework:
+	python setup.py install
 
 init: create_venv install_venv upgrade_venv
 

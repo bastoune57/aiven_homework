@@ -2,8 +2,8 @@
 from kafka import KafkaProducer
 
 # import own modules
-from homework.config import config 
-from homework.helper_functions import generate_json_message
+from config import config 
+from helper_functions import generate_json_message
 
 class Producer:
     """
