@@ -1,34 +1,54 @@
-# Aiven Homework
+# Aiven Homework Package
 In the recruiting process for Aiven, a homework is given. This repository is the source code for the assignment. 
 
 ## installation
-The project is written in Python3 and pip environment is required. (install pip following https://pip.pypa.io/en/stable/installing/). It is recommended to create a virtual environment (https://docs.python.org/3/tutorial/venv.html).
-Then load the pip configuration:
+The project is written in Python3 usin pip and virtual environment. Install the project using:
 ```bash
-pip3 install -r requirements.txt
+make init
 ```
+
+## Prerequisite
+To be able to connect to the Aiven servers you need a ./src folder with the host\_settings.ini files. You also need a ssl folder in the ./scr folder with the 3 connection files: ca.pem, service.cert and service.key
+In order to obtain these filesm please contact the project manager at bastien.hamet@gmail.com.
+
+## Core info about project
+Folder architecture is as follow:
+
+.
++-- _docs
++-- _homework
++-- _src
+|   +-- host_settings.ini
+|   +-- ssl
+|   |	+-- ca.pem
+|   |	+-- service.key
+|   |	+-- service.cert
++-- _tests
++-- doxy_config
++-- LICENSE
++-- Makefile
++-- README.md
++-- requirements.txt
++-- setup.py
++-- test.py
+
+The main module is called homework and the core code is implemented in this module.
 
 ## usage
-The project will have a kafka producer (producer.py) and a consumer (consumer.py) that will interact with a kafka server and a postgresql database that are both hosted by Aiven. 
+The project will have a kafka producer (producer.py) and a consumer (consumer.py) that will interact with a kafka server and a postgresql database that are both hosted by Aiven. The homework implemented creates a producer that sends some random records to the kafka server. Then a consumer is created that reads the records, validate them and write them in a Postgresql database.
 
-Starting the producer will send 3 records to the kafka server
+Start the homework using:
 ```bash
-python3 producer.py
+make start_producer
 ```
 
-Starting the consumer will read available records from the kafka server then push it to a postgresql database
+Start the test ptocedures using:
 ```bash
-python3 consumer.py
-```
-
-Starting the test ptocedures
-```bash
-python -m unittest -v test.py
+make start_all_tests
 ```
 
 ## Licenses
-* [GNU] https://www.psycopg.org/docs/license.html
-* [Kafka] Apache License, v2.0. 
+See LICENSE file
 
 ### Assignment
 Software Engineer in Support
