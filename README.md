@@ -21,6 +21,11 @@ Starting the consumer will read available records from the kafka server then pus
 python3 consumer.py
 ```
 
+Starting the test ptocedures
+```bash
+python -m unittest -v test.py
+```
+
 ## Licenses
 * [GNU] https://www.psycopg.org/docs/license.html
 * [Kafka] Apache License, v2.0. 
