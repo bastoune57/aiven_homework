@@ -21,7 +21,7 @@ class Consumer(Database):
         and create a postgresql connection instance
         Check if the table of interest is in or create it
         """
-        # inheritance handeling 
+        # inheritance handling 
         Database.__init__(self)
 
         self.table_name = "routes_table2"
@@ -66,6 +66,7 @@ class Consumer(Database):
                             sql_str = self.create_sql_command(record_str)
                             # execute sql
                             self.execute_sql(sql_str)
+                            print("Consumer: record written to database")
                     except (Exception, ValueError) as error:
                         print(error)
                     
@@ -77,6 +78,6 @@ if __name__ == '__main__':
     try:
         consumer = Consumer()
         consumer.poll()
-        print(consumer.get_table_content())
+        #print(consumer.get_table_content())
     except (Exception) as error:
         print("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))

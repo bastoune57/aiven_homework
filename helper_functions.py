@@ -143,7 +143,6 @@ if __name__ == '__main__':
     try:
         record = generate_json_message()
         validate_record_format(record)
-        create_sql_command(record, 'routes_table1')
     except (Exception, ValueError) as error:
         print(error)
 
