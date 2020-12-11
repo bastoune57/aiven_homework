@@ -16,7 +16,6 @@ Folder architecture is as follow:
 
 ```
 .
-+-- _docs
 +-- _homework
 +-- _src
 |   +-- host_settings.ini
@@ -24,7 +23,6 @@ Folder architecture is as follow:
 |   |	+-- ca.pem
 |   |	+-- service.key
 |   |	+-- service.cert
-+-- _tests
 +-- doxy_config
 +-- LICENSE
 +-- Makefile
