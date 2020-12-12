@@ -8,7 +8,7 @@ make init
 ```
 
 ## Prerequisite
-To be able to connect to the Aiven servers you need a ./src folder with the host\_settings.ini files. You also need a ssl folder in the ./scr folder with the 3 connection files: ca.pem, service.cert and service.key
+To be able to connect to the Aiven servers you need a ./res folder with the host\_settings.ini file. You also need a ssl folder in the ./res folder with the 3 connection files: ca.pem, service.cert and service.key
 In order to obtain these filesm please contact the project manager at bastien.hamet@gmail.com.
 
 ## Core info about project
@@ -16,22 +16,22 @@ Folder architecture is as follow:
 
 ```
 .
-+-- _homework
-|   +-- config.py
-|   +-- consumer.py
-|   +-- database.py
-|   +-- helper_functions.py
-|   +-- producer.py
 +-- _src
+|   +-- _homework
+|   |      +-- config.py
+|   |      +-- consumer.py
+|   |      +-- database.py
+|   |      +-- helper_functions.py
+|   |      +-- producer.py
+|   +-- _tests
+|   |      +-- test.py
++-- _res
 |   +-- host_settings.ini
-|   +-- ssl
+|   +-- _ssl
 |   |	+-- ca.pem
 |   |	+-- service.key
 |   |	+-- service.cert
-+-- _tests
-|   +-- test.py
 +-- doxy_config
-+-- test.py
 +-- LICENSE
 +-- Makefile
 +-- README.md

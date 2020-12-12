@@ -3,7 +3,8 @@
 ## declare variable name
 path_to_venv=./venv
 python_version=python3
-pkg_name=homework
+homework_path=src/homework
+tests_path=src/tests
 
 ## declare commands
 
@@ -22,15 +23,15 @@ install_pkg_homework:
 init: create_venv install_venv upgrade_venv
 
 start_producer:
-	$(path_to_venv)/bin/$(python_version) $(pkg_name)/producer.py
+	$(path_to_venv)/bin/$(python_version) $(homework_path)/producer.py
 
 start_consumer:
-	$(path_to_venv)/bin/$(python_version) $(pkg_name)/consumer.py
+	$(path_to_venv)/bin/$(python_version) $(homework_path)/consumer.py
 
 start_database:
-	$(path_to_venv)/bin/$(python_version) $(pkg_name)/database.py
+	$(path_to_venv)/bin/$(python_version) $(homework_path)/database.py
 
 run_homework: start_producer start_consumer
 
 run_all_tests: 
-	$(path_to_venv)/bin/$(python_version) -m unittest -v tests/test.py
+	$(path_to_venv)/bin/$(python_version) -m unittest -v $(tests_path)/test.py

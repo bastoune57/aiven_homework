@@ -3,7 +3,7 @@ this code is taken (inspired) from https://www.postgresqltutorial.com/postgresql
 '''
 from configparser import ConfigParser
 
-def config(filename='./src/host_settings.ini', section='postgresql'):
+def config(filename='./res/host_settings.ini', section='postgresql'):
     # create a parser
     parser = ConfigParser()
     # read config file
