@@ -1,4 +1,5 @@
 # import libraries
+import logging
 import unittest
 import json
 
@@ -26,7 +27,7 @@ class TestHomework(unittest.TestCase):
             producer = Producer()
             producer.send()
         except (Exception) as error:
-            print("\n\nProducer's connection to kafka failed with error: {}\n\n".format(error))
+            logging.error("\n\nProducer's connection to kafka failed with error: {}\n\n".format(error))
             assert(False)
     
     
@@ -38,7 +39,7 @@ class TestHomework(unittest.TestCase):
             consumer = Consumer()
             consumer.poll()
         except (Exception) as error:
-            print("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))
+            logging.error("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))
             assert(False)
 
     def test_db_connection(self):
@@ -49,7 +50,7 @@ class TestHomework(unittest.TestCase):
             database = Database()
             database.get_server_version()
         except (Exception) as error:
-            print("\n\nConnection to postgresql failed with error: {}\n\n".format(error))
+            logging.error("\n\nConnection to postgresql failed with error: {}\n\n".format(error))
             assert(False)
 
     def test_msg_generation(self):
@@ -61,10 +62,10 @@ class TestHomework(unittest.TestCase):
         """
         try:
             record_str = generate_json_message()
-            validate_record_format(record_str)
         except (Exception, ValueError) as error:
             print(error)
             assert(False)
+        assert(validate_record_format(record_str))
             
     def test_sql_insertion(self):
         """
@@ -88,7 +89,7 @@ class TestHomework(unittest.TestCase):
             # XXX a better test would be to fetch the last element and compare with the generated one
 
         except (Exception, ValueError) as error:
-            print(error)
+            logging.error(error)
             assert(False)
 
 if __name__ == '__main__':

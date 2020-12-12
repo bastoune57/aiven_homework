@@ -1,3 +1,4 @@
+import logging
 import json
 import random
 from datetime import datetime
@@ -44,7 +45,7 @@ def validate_record_format(record):
         validate_timestamp (data)
         validate_coordinates (data)
     except(Exception) as error:
-        print(error)
+        logging.error(error)
         return False
     
     return True
@@ -139,5 +140,5 @@ if __name__ == '__main__':
         record = generate_json_message()
         validate_record_format(record)
     except (Exception, ValueError) as error:
-        print(error)
+        logging.error(error)
 

@@ -32,13 +32,14 @@ Once downloaded from git you can prepare the project using:
 make init
 ```
 
-## Core info about project
+## Code structure 
 Folder architecture is as follow:
 
 ```
 .
 +-- _src
 |   +-- _homework
+|   |      +-- __init__.py
 |   |      +-- config.py
 |   |      +-- consumer.py
 |   |      +-- database.py

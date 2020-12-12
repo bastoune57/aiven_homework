@@ -1,3 +1,4 @@
+import logging
 import json
 import psycopg2
 from config import config
@@ -44,7 +45,7 @@ class Database:
             self.conn.commit()
 
         except (Exception, psycopg2.DatabaseError) as error:
-            print("\nexecute_sql() error:", error)
+            logging.error("\nexecute_sql() error:", error)
             self.conn.rollback()
 
 
@@ -61,7 +62,7 @@ class Database:
         s += " longitude DOUBLE PRECISION NOT NULL);"
         # execute command
         self.execute_sql(s)
-        print("table initialised")
+        print("Table will be initialised if it does not exist yet.")
 
 
     def list_tables(self):
@@ -131,4 +132,4 @@ if __name__ == '__main__':
         print(db.list_tables())
         db.get_server_version()
     except(Exception, psycopg2.DatabaseError) as error:
-        print(error)
+        logging.error(error)

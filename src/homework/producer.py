@@ -2,6 +2,7 @@
 This code is inpired from the Aiven article on getting started with Aiven kafka (https://help.aiven.io/en/articles/489572-getting-started-with-aiven-kafka)
 '''
 # import libraries
+import logging
 from kafka import KafkaProducer
 
 # import own modules
@@ -49,4 +50,4 @@ if __name__ == '__main__':
         producer = Producer()
         producer.send()
     except (Exception) as error:
-        print("\n\nProducer's connection to kafka failed with error: {}\n\n".format(error))
+        logging.error("\n\nProducer's connection to kafka failed with error: {}\n\n".format(error))

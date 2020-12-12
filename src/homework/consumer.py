@@ -1,8 +1,8 @@
 '''
 This code is inpired from the Aiven article on getting started with Aiven kafka (https://help.aiven.io/en/articles/489572-getting-started-with-aiven-kafka)
 '''
-
 # import libraries
+import logging
 import psycopg2
 from kafka import KafkaConsumer
 
@@ -43,7 +43,7 @@ class Consumer(Database):
             )
         
         except (Exception) as error:
-            print(error)
+            logging.error(error)
 
         # if our table does not exist yet then create it
         self.create_table(self.table_name)
@@ -70,7 +70,7 @@ class Consumer(Database):
                             self.execute_sql(sql_str)
                             print("Consumer: record written to database")
                     except (Exception, ValueError) as error:
-                        print(error)
+                        logging.error(error)
                     
         # Commit offsets so we won't get the same messages again        
         self.consumer.commit()
@@ -82,4 +82,4 @@ if __name__ == '__main__':
         consumer.poll()
         #print(consumer.get_table_content())
     except (Exception) as error:
-        print("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))
+        logging.error("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))

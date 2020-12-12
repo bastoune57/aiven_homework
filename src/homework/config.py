@@ -1,6 +1,7 @@
 '''
 this code is an attribution from https://www.postgresqltutorial.com/postgresql-python/connect/
 '''
+import logging
 from configparser import ConfigParser
 
 def config(filename='./res/host_settings.ini', section='postgresql'):
@@ -30,5 +31,5 @@ if __name__ == '__main__':
     try:
         db = config(section='kafka')
     except(Exception) as error:
-        print(error)
+        logging.error(error)
         
