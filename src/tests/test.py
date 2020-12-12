@@ -83,7 +83,7 @@ class TestHomework(unittest.TestCase):
             result = consumer.execute_sql(sql_str)
             # print all from table
             result = consumer.get_table_content()
-            print(result)
+            #print(result)
             # XXX a better test would be to fetch the last element and compare with the generated one
 
         except (Exception, ValueError) as error:

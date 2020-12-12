@@ -1,5 +1,5 @@
 '''
-this code is taken (inspired) from https://www.postgresqltutorial.com/postgresql-python/connect/
+this code is an attribution from https://www.postgresqltutorial.com/postgresql-python/connect/
 '''
 from configparser import ConfigParser
 

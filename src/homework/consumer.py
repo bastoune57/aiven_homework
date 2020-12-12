@@ -1,3 +1,7 @@
+'''
+This code is inpired from the Aiven article on getting started with Aiven kafka (https://help.aiven.io/en/articles/489572-getting-started-with-aiven-kafka)
+'''
+
 # import libraries
 import psycopg2
 from kafka import KafkaConsumer
