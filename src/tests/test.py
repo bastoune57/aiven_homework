@@ -1,10 +1,10 @@
 # import libraries
 import logging
 import unittest
-import json
 
 # add homework path to system path
-import sys, os
+import sys
+import os
 my_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, my_path + '/../homework/')
 
@@ -14,11 +14,12 @@ from consumer import Consumer
 from database import Database
 from helper_functions import generate_json_message, validate_record_format
 
+
 class TestHomework(unittest.TestCase):
     """
     class that will handle testing of the producer
     """
-    
+
     def test_producer(self):
         """
         Test the instanciation and good working of the kafka producer
@@ -27,10 +28,10 @@ class TestHomework(unittest.TestCase):
             producer = Producer()
             producer.send()
         except (Exception) as error:
-            logging.error("\n\nProducer's connection to kafka failed with error: {}\n\n".format(error))
+            logging.error("\n\nProducer's connection to"
+                        "kafka failed with error: {}\n\n".format(error))
             assert(False)
-    
-    
+
     def test_consumer(self):
         """
         Test the instanciation and good working of the kafka consumer
@@ -39,7 +40,8 @@ class TestHomework(unittest.TestCase):
             consumer = Consumer()
             consumer.poll()
         except (Exception) as error:
-            logging.error("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))
+            logging.error("\n\nConsumer's connection to"
+                        "kafka failed with error: {}\n\n".format(error))
             assert(False)
 
     def test_db_connection(self):
@@ -50,12 +52,13 @@ class TestHomework(unittest.TestCase):
             database = Database()
             database.get_server_version()
         except (Exception) as error:
-            logging.error("\n\nConnection to postgresql failed with error: {}\n\n".format(error))
+            logging.error("\n\nConnection to postgresql"
+                    " failed with error: {}\n\n".format(error))
             assert(False)
 
     def test_msg_generation(self):
         """
-        Test that the function generating the message returns a json with 
+        Test that the function generating the message returns a json with
         userId as a positive integer
         datestamp as float
         coordinates as tuple of float
@@ -66,12 +69,11 @@ class TestHomework(unittest.TestCase):
             print(error)
             assert(False)
         assert(validate_record_format(record_str))
-            
+
     def test_sql_insertion(self):
         """
         Test that the sql insertion in the database works
         """
-        #create a valid record
         try:
             # generate record as from kafka server
             record_str = generate_json_message()
@@ -86,11 +88,13 @@ class TestHomework(unittest.TestCase):
             result = consumer.get_table_content()
             for res in result:
                 print(res)
-            # XXX a better test would be to fetch the last element and compare with the generated one
+            # XXX a better test would be to fetch the
+            # last element and compare with the generated one
 
         except (Exception, ValueError) as error:
             logging.error(error)
             assert(False)
+
 
 if __name__ == '__main__':
     unittest.main()

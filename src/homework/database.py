@@ -3,24 +3,28 @@ import json
 import psycopg2
 from config import config
 
+
 class Database:
     """! Wrapper for the database connection
 
-    It gives the possibility to connect to the postgresql server and interact with it executing sql commands such as: create and list tables, list table content...
+    It gives the possibility to connect to the postgresql
+    server and interact with it executing sql commands such
+    as: create and list tables, list table content...
     """
 
     def __init__(self):
         """! The Database class initializer.
 
-        Load postgresql configuration settings from config file (default host_settings.ini)
+        Load postgresql configuration settings from config
+        file (default host_settings.ini)
         and create a postgresql connection instance.
         """
         # read connection parameters
         pg_config = config(section='postgresql')
-        
+
         # connect to db
         self.conn = psycopg2.connect(**pg_config)
-        
+
         # create a cursor
         self.cur = self.conn.cursor()
 
@@ -32,7 +36,6 @@ class Database:
         self.cur.close()
         self.conn.close()
 
-
     def execute_sql(self, sql_string):
         """! The Database execute_sql function.
 
@@ -41,17 +44,16 @@ class Database:
         """
         try:
             # execute the sql
-            self.cur.execute( sql_string )
+            self.cur.execute(sql_string)
             self.conn.commit()
 
         except (Exception, psycopg2.DatabaseError) as error:
             logging.error("\nexecute_sql() error:", error)
             self.conn.rollback()
 
-
     def create_table(self, table_name):
         """! Creates a table with table_name if not already existing
-        
+
         @param table_name String name of the table to be created
         """
         # create sql command
@@ -64,7 +66,6 @@ class Database:
         self.execute_sql(s)
         print("Table will be initialised if it does not exist yet.")
 
-
     def list_tables(self):
         """! Lists tables from database
 
@@ -72,7 +73,8 @@ class Database:
         """
         # create sql command
         s = "SELECT table_schema, table_name FROM information_schema.tables"
-        s += " WHERE ( table_schema = 'public' ) ORDER BY table_schema, table_name;"
+        s += " WHERE ( table_schema = 'public' )"
+        s += " ORDER BY table_schema, table_name;"
         return self.get_execute_sql(s)
 
     def get_table_content(self):
@@ -92,25 +94,28 @@ class Database:
         """
         # execute command
         self.execute_sql(sql_str)
-        # fetch response 
+        # fetch response
         result = self.cur.fetchall()
-        
+
         return result
 
+    def create_sql_command(self, record_str):
+        """! Function that creates the sql command to
+        insert the received verified records
 
-    def create_sql_command (self, record_str):
-        """! Function that creates the sql command to insert the received verified records
-        
         @param record_str The json string of received verified record
         @return The string corresponding to the sql command
         """
         record = json.loads(record_str)
-        sql_string = 'INSERT INTO {} '.format( self.table_name )
+        sql_string = 'INSERT INTO {} '.format(self.table_name)
         sql_string += "( user_id, timestamp, latitude, longitude )\nVALUES ("
-        sql_string += "{}, {}, {}, {});".format(record['userId'], record['timestamp'],record['coordinates'][0], record['coordinates'][1])
-        
-        return sql_string
+        sql_string += "{}, {}, {}, {});".format(
+                record['userId'],
+                record['timestamp'],
+                record['coordinates'][0],
+                record['coordinates'][1])
 
+        return sql_string
 
     def get_server_version(self):
         """
@@ -119,16 +124,16 @@ class Database:
         # execute a statement
         print('PostgreSQL database version:')
         self.cur.execute('SELECT version()')
-        
+
         # display the PostgreSQL database server version
         db_version = self.cur.fetchone()
         print(db_version)
-        
+
 
 if __name__ == '__main__':
     try:
         db = Database()
-        #db.create_table("routes_table")
+        # db.create_table("routes_table")
         print(db.list_tables())
         db.get_server_version()
     except(Exception, psycopg2.DatabaseError) as error:

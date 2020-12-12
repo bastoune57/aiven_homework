@@ -1,9 +1,10 @@
 '''
-This code is inpired from the Aiven article on getting started with Aiven kafka (https://help.aiven.io/en/articles/489572-getting-started-with-aiven-kafka)
+This code is inpired from the Aiven article on
+getting started with Aiven kafka
+(https://help.aiven.io/en/articles/489572-getting-started-with-aiven-kafka)
 '''
 # import libraries
 import logging
-import psycopg2
 from kafka import KafkaConsumer
 
 # import own modules
@@ -11,20 +12,24 @@ from config import config
 from database import Database
 from helper_functions import validate_record_format
 
+
 class Consumer(Database):
     """! Wrapper for kafka consumer.
     This class inheritates from the Database class.
-    This wrapper handles creating the instance, closing and sending messages to topic.
+    This wrapper handles creating the instance, closing and
+    sending messages to topic.
     """
 
     def __init__(self):
         """! Initializer for the Consumer Class.
-        Loads the kafka configuration settings from config file (default host_settings.ini)
-        and create a kafka consumer instance.
-        Then loads the postgresql configuration settings from config file (default host_settings.ini)
-        and create a postgresql connection instance. It will also check if the table of interest is in or create it
+        Loads the kafka configuration settings from
+        config file (default host_settings.ini)
+        and create a kafka consumer instance. Then loads the postgresql
+        configuration settings from config file (default host_settings.ini)
+        and create a postgresql connection instance. It will also check
+        if the table of interest is in or create it
         """
-        # inheritance handling 
+        # inheritance handling
         Database.__init__(self)
 
         self.table_name = "routes_table"
@@ -38,16 +43,15 @@ class Consumer(Database):
                 auto_offset_reset="earliest",
                 client_id="demo-client-1",
                 group_id="demo-group",
-                security_protocol = "SSL",
+                security_protocol="SSL",
                 **kafka_config,
             )
-        
+
         except (Exception) as error:
             logging.error(error)
 
         # if our table does not exist yet then create it
         self.create_table(self.table_name)
-
 
     def poll(self):
         """! Polls records from the kafka server
@@ -71,8 +75,8 @@ class Consumer(Database):
                             print("Consumer: record written to database")
                     except (Exception, ValueError) as error:
                         logging.error(error)
-                    
-        # Commit offsets so we won't get the same messages again        
+
+        # Commit offsets so we won't get the same messages again
         self.consumer.commit()
 
 
@@ -80,6 +84,7 @@ if __name__ == '__main__':
     try:
         consumer = Consumer()
         consumer.poll()
-        #print(consumer.get_table_content())
+        # print(consumer.get_table_content())
     except (Exception) as error:
-        logging.error("\n\nConsumer's connection to kafka failed with error: {}\n\n".format(error))
+        logging.error("\n\nConsumer's connection to"
+                " kafka failed with error: {}\n\n".format(error))

@@ -1,15 +1,22 @@
 '''
-this code is an attribution from https://www.postgresqltutorial.com/postgresql-python/connect/
+this code is an attribution
+from https://www.postgresqltutorial.com/postgresql-python/connect/
 '''
 import logging
 from configparser import ConfigParser
 
-def config(filename='./res/host_settings.ini', section='postgresql'):
-    """! Parses the filename file configuration and loads the section of interest. 
 
-    @param filenane The filename of the configuration file including path from project directory (Default: ./res/host_settings.ini).
-    @param section The section to be read from the configuration file (Default: 'postgresql')
-    @return The tuple of loaded elements with corresponding key values as in configuration file
+def config(filename='./res/host_settings.ini',
+        section='postgresql'):
+    """! Parses the filename file configuration
+    and loads the section of interest.
+
+    @param filenane The filename of the configuration file including
+    path from project directory (Default: ./res/host_settings.ini).
+    @param section The section to be read from the configuration
+    file (Default: 'postgresql')
+    @return The tuple of loaded elements with corresponding
+    key values as in configuration file
     """
 
     # create a parser
@@ -27,9 +34,9 @@ def config(filename='./res/host_settings.ini', section='postgresql'):
 
     return db
 
+
 if __name__ == '__main__':
     try:
         db = config(section='kafka')
     except(Exception) as error:
         logging.error(error)
-        

@@ -113,7 +113,9 @@ Use your browser to load the generated index.html from the generated folder: ./d
 
 The homework is made using several already existing libraries which are:
 * **json:** used as a decoder and encoder for JSON format (https://docs.python.org/3/library/json.html)
+* **kafka:** used as kafka adapter for Python (https://pypi.org/project/kafka-python/)
 * **psycopg2:** used as a PostgreSQL adapter for Python (https://pypi.org/project/psycopg2/)
+* **logging:** used for non application outcome console output 
 * **configParser:** used to read and parse configuration files
 * **random:** used to generate random numbers 
 * **datetime:** used to work with timestamps 
