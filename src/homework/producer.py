@@ -6,14 +6,14 @@ from helper_functions import generate_json_message
 from config import config 
 
 class Producer:
-    """
-    Wrapper for kafka producer.
+    """! Wrapper for kafka producer.
     This wrapper handles creating the instance, closing and sending messages to topic.
     """
 
     def __init__ (self):
-        """
-        load kafka configuration settings from config file (default host_settings.ini)
+        """! Producer init function. 
+
+        it loads kafka configuration settings from config file (default host_settings.ini)
         and create a kafka producer instance 
         """
         # load connection parameters
@@ -27,7 +27,8 @@ class Producer:
 
 
     def send (self):
-        """
+        """! The producer send function
+
         Create messages and send them to the kafka server 
         """
         # first check connection was succesful

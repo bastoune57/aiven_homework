@@ -3,15 +3,16 @@ import psycopg2
 from config import config
 
 class Database:
-    """
-    Wrapper for the database connection
-    It will create a connection to the DB and write to it
+    """! Wrapper for the database connection
+
+    It gives the possibility to connect to the postgresql server and interact with it executing sql commands such as: create and list tables, list table content...
     """
 
     def __init__(self):
-        """
-        load postgresql configuration settings from config file (default host_settings.ini)
-        and create a postgresql connection instance 
+        """! The Database class initializer.
+
+        Load postgresql configuration settings from config file (default host_settings.ini)
+        and create a postgresql connection instance.
         """
         # read connection parameters
         pg_config = config(section='postgresql')
@@ -23,16 +24,19 @@ class Database:
         self.cur = self.conn.cursor()
 
     def __del__(self):
-        """
-        delete postgresql connection instance 
+        """! The Database class deleter
+
+        Closes the postgresql connection
         """
         self.cur.close()
         self.conn.close()
 
 
     def execute_sql(self, sql_string):
-        """
-        excecute a sql command
+        """! The Database execute_sql function.
+
+        It executes a sql command in the database server
+        @param sql_string The string containig the command to be executed.
         """
         try:
             # execute the sql
@@ -45,10 +49,9 @@ class Database:
 
 
     def create_table(self, table_name):
-        """
-        Create a table with our settings with given name
+        """! Creates a table with table_name if not already existing
         
-        :param table_name: string name of the table to be created
+        @param table_name String name of the table to be created
         """
         # create sql command
         s = 'CREATE TABLE IF NOT EXISTS {} ('.format(table_name)
@@ -62,10 +65,9 @@ class Database:
 
 
     def list_tables(self):
-        """
-        list tables from database
+        """! Lists tables from database
 
-        :return result from selecting all available tables
+        @return Result from selecting all available tables
         """
         # create sql command
         s = "SELECT table_schema, table_name FROM information_schema.tables"
@@ -73,21 +75,19 @@ class Database:
         return self.get_execute_sql(s)
 
     def get_table_content(self):
-        """
-        list table content
+        """! Lists table content
 
-        :return sql result from selecting all table content
+        @return sql result from selecting all table content
         """
         # create sql
         s = "SELECT * from {};".format(self.table_name)
         return self.get_execute_sql(s)
 
     def get_execute_sql(self, sql_str):
-        """
-        execute sql and return results
+        """! Executes sql command and return result
 
-        :parmam sql_str: str containing a verified sql command
-        :return results: results from sql in postgresql
+        @parmam sql_str String containing a verified sql command
+        @return Results from sql in postgresql
         """
         # execute command
         self.execute_sql(sql_str)
@@ -98,11 +98,10 @@ class Database:
 
 
     def create_sql_command (self, record_str):
-        """
-        function that creates the sql command to insert the received verified records
+        """! Function that creates the sql command to insert the received verified records
         
-        :param record_str: the json string of received verified record
-        :return sql_str: the string corresponding to the sql command
+        @param record_str The json string of received verified record
+        @return The string corresponding to the sql command
         """
         record = json.loads(record_str)
         sql_string = 'INSERT INTO {} '.format( self.table_name )

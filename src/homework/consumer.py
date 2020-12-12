@@ -8,18 +8,17 @@ from database import Database
 from helper_functions import validate_record_format
 
 class Consumer(Database):
-    """
-    Wrapper for kafka consumer.
+    """! Wrapper for kafka consumer.
+    This class inheritates from the Database class.
     This wrapper handles creating the instance, closing and sending messages to topic.
     """
 
     def __init__(self):
-        """
-        load kafka configuration settings from config file (default host_settings.ini)
-        and create a kafka consumer instance
-        Then load postgresql configuration settings from config file (default host_settings.ini)
-        and create a postgresql connection instance
-        Check if the table of interest is in or create it
+        """! Initializer for the Consumer Class.
+        Loads the kafka configuration settings from config file (default host_settings.ini)
+        and create a kafka consumer instance.
+        Then loads the postgresql configuration settings from config file (default host_settings.ini)
+        and create a postgresql connection instance. It will also check if the table of interest is in or create it
         """
         # inheritance handling 
         Database.__init__(self)
@@ -47,8 +46,7 @@ class Consumer(Database):
 
 
     def poll(self):
-        """
-        Poll records from the kafka server
+        """! Polls records from the kafka server
         """
 
         # Call poll twice. First call will just assign partitions for our

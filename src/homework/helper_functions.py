@@ -3,11 +3,10 @@ import random
 from datetime import datetime
 
 def generate_json_message(userId=-1):
-    """
-    function that generate a json string with user id, datestamp and random coordinates information
+    """! Function that generates a json string with user id, datestamp and random coordinates information
 
-    :param userID: indicates the userID (if not given, or a negative value, a random number between 0 and 9 will be chosen)
-    :return json_str: a json formatted string with the ser id, datestamp and random coordinates information 
+    @param userId indicates the userID. If not given, or a negative value, a random number between 0 and 9 will be chosen.
+    @return json_str A json formatted string with the userId, datestamp and random coordinates information
     """
 
     # get userID -> random (in range [0;9]) if not given
@@ -29,11 +28,10 @@ def generate_json_message(userId=-1):
 
 
 def validate_record_format(record):
-    """
-    function that validates the format of the messages read from the kafka server and to be pushed to the postgresql db
+    """! Function that validates the format of the records read from the kafka server and to be pushed to the postgresql db
 
-    :param record: string of json format to be checked
-    :return boolean of validity 
+    @param record A string of json format to be checked
+    @return The boolean value of validity 
     """
     try:
         data = json.loads(record)
@@ -54,10 +52,9 @@ def validate_record_format(record):
 
 
 def validate_userId (record):
-    """
-    function that get the json decoded record to verify the userId content
+    """! Function that gets the json decoded record to verify the userId content
     
-    :param record: decoded json record
+    @param record Decoded json record
     """
     # check timestamp is in the record
     if 'userId' not in record:
@@ -76,10 +73,9 @@ def validate_userId (record):
 
 
 def validate_timestamp (record):
-    """
-    function that get the json decoded record to verify the timestamp content
+    """! Function that get the json decoded record to verify the timestamp content
     
-    :param record: decoded json record
+    @param record Decoded json record
     """
     # check timestamp is in the record
     if 'timestamp' not in record:
@@ -97,10 +93,9 @@ def validate_timestamp (record):
 
 
 def validate_coordinates (record):
-    """
-    function that get the json decoded record to verify the coordinates content
+    """! Function that get the json decoded record to verify the coordinates content
 
-    :param record: decoded json record
+    @param record Decoded json record
     """
 
     # check coordinates is in the record

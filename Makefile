@@ -1,4 +1,4 @@
-.PHONY: init create_venv install_pkg_homework install_venv upgrade_venv start_producer start_consumer start_database start_homework
+.PHONY: init docs create_venv install_pkg_homework install_venv upgrade_venv start_producer start_consumer start_database start_homework
 
 ## declare variable name
 path_to_venv=./venv
@@ -35,3 +35,6 @@ run_homework: start_producer start_consumer
 
 run_all_tests: 
 	$(path_to_venv)/bin/$(python_version) -m unittest -v $(tests_path)/test.py
+
+docs:
+	$(path_to_venv)/bin/doxygen doxy_config

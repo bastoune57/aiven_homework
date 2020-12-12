@@ -58,7 +58,7 @@ A record is composed of:
 
 In Postgresql the database is called **routes** and the table **routes\_table**. 
 
-## usage
+## Usage
 Start the homework using:
 ```bash
 make start_homework
@@ -68,6 +68,21 @@ Start the test ptocedures using:
 ```bash
 make start_all_tests
 ```
+
+## Documentation
+Documentation is generated with Doxygen. 
+
+To install Doxygen on Ubuntu:
+```bash
+sudo apt install doxygen graphviz
+```
+
+To generate the documentation:
+```bash
+make docs
+```
+
+Use your browser to load the generated index.html from the generated folder: ./docs/html/index.html
 
 ## Licenses
 See LICENSE file
