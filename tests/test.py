@@ -2,13 +2,18 @@
 import unittest
 import json
 
-# import own modules
-from homework.producer import Producer
-from homework.consumer import Consumer
-from homework.database import Database
-from homework.helper_functions import generate_json_message, validate_record_format
+# add homework path to system path
+import sys, os
+my_path = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, my_path + '/../homework/')
 
-class TestAssignment(unittest.TestCase):
+# import own code
+from producer import Producer
+from consumer import Consumer
+from database import Database
+from helper_functions import generate_json_message, validate_record_format
+
+class TestHomework(unittest.TestCase):
     """
     class that will handle testing of the producer
     """

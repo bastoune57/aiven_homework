@@ -28,13 +28,15 @@ Folder architecture is as follow:
 |   |	+-- ca.pem
 |   |	+-- service.key
 |   |	+-- service.cert
++-- _tests
+|   +-- test.py
 +-- doxy_config
++-- test.py
 +-- LICENSE
 +-- Makefile
 +-- README.md
 +-- requirements.txt
 +-- setup.py
-+-- test.py
 ```
 The main module is called **homework** and the core code is implemented in this module. The files files contain:
 * config.py: a module that read .ini files using the configParser module
@@ -43,7 +45,7 @@ The main module is called **homework** and the core code is implemented in this 
 * producer.py: a class that handles creating and sending records to the kafka server.
 * helper\_functions.py: a class contains often used functions: validation functions and generating JSON strings from records. Ideally it should move to a utils library.
 
-## Homework Fonctionality
+## Homework Functionality
 
 The project will have a kafka producer (producer.py) and a consumer (consumer.py) that will interact with a kafka server and a postgresql database that are both hosted by Aiven. The homework implemented creates a producer that sends some random records to the kafka server. Then a consumer is created that reads the records, validate them and write them in a Postgresql database. Records are sent using a JSON formating.
 

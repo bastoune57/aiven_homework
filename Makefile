@@ -17,9 +17,9 @@ upgrade_venv:
 	$(path_to_venv)/bin/pip install -r requirements.txt
 
 install_pkg_homework:
-	python setup.py install
+	$(path_to_venv)/bin/$(python_version) setup.py install
 
-init: create_venv install_venv upgrade_venv install_pkg_homework
+init: create_venv install_venv upgrade_venv
 
 start_producer:
 	$(path_to_venv)/bin/$(python_version) $(pkg_name)/producer.py
@@ -33,4 +33,4 @@ start_database:
 run_homework: start_producer start_consumer
 
 run_all_tests: 
-	python -m unittest -v tests/test.py
+	$(path_to_venv)/bin/$(python_version) -m unittest -v tests/test.py
