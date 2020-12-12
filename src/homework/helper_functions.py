@@ -68,19 +68,19 @@ def validate_userId (record):
     """
     # check timestamp is in the record
     if 'userId' not in record:
-        raise Exception('userId missing from JSON string')
+        raise Exception("userId missing from JSON string")
 
     userId = record['userId']
 
     # check timestamp is a float
     if not isinstance(userId, int):
-        raise Exception('userId invalid type ""
-                {} (should be an integer)'.format(type(userId)))
+        raise Exception("userId invalid type "
+                "{} (should be an integer)".format(type(userId)))
 
     # check timestamp is >0
     if userId < 0:
-        raise Exception('userId invalid value "
-                "{} (should be a positive value)'.format(userId))
+        raise Exception("userId invalid value "
+                "{} (should be a positive value)".format(userId))
 
 def validate_timestamp (record):
     """! Function that get the json decoded record
@@ -90,19 +90,19 @@ def validate_timestamp (record):
     """
     # check timestamp is in the record
     if 'timestamp' not in record:
-        raise Exception('timestamp missing from JSON string')
+        raise Exception("timestamp missing from JSON string")
 
     timestamp = record['timestamp']
 
     # check timestamp is a float
     if not isinstance(timestamp, float):
-        raise Exception('timestamp invalid type "
-                "{} (should be a float)'.format(type(timestamp)))
+        raise Exception("timestamp invalid type "
+                "{} (should be a float)".format(type(timestamp)))
 
     # check timestamp is >0
     if timestamp < 0: 
-        raise Exception('timestamp invalid value "
-                "{} (should be a positive value)'.format(timestamp))
+        raise Exception("timestamp invalid value "
+                "{} (should be a positive value)".format(timestamp))
 
 
 def validate_coordinates (record):
@@ -118,21 +118,21 @@ def validate_coordinates (record):
 
     # check coordinates is a tuple
     if not isinstance(record['coordinates'], list):
-        raise Exception('coordinates invalid type "
-                "{} (should be a list)'.format(type(record['coordinates'])))
+        raise Exception("coordinates invalid type "
+                "{} (should be a list)".format(type(record['coordinates'])))
 
     # check there are exactly 2 coordinates
     if len(record['coordinates']) != 2:
-        raise Exception('coordinates invalid length "
-                "{} (should be a 2)'.format(len(record['coordinates'])))
+        raise Exception("coordinates invalid length "
+                "{} (should be a 2)".format(len(record['coordinates'])))
 
     # get latitude
     latitude=record['coordinates'][0]
 
     # check latitude is a float
     if not isinstance(latitude, float):
-        raise Exception('latitude invalid type "
-                "{} (should be a float)'.format(type(latitude)))
+        raise Exception("latitude invalid type "
+                "{} (should be a float)".format(type(latitude)))
 
     # check that latitude value is between -90 and 90
     if latitude < -90 or latitude > 90:
@@ -144,8 +144,8 @@ def validate_coordinates (record):
 
     # check latitude is a float
     if not isinstance(longitude, float):
-        raise Exception('longitude invalid type "
-                "{} (should be a float)'.format(type(longitude)))
+        raise Exception("longitude invalid type "
+                "{} (should be a float)".format(type(longitude)))
 
     # check that latitude value is between -90 and 90
     if longitude < -180 or longitude > 180:
