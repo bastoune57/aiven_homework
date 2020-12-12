@@ -80,7 +80,7 @@ class Database:
         @return sql result from selecting all table content
         """
         # create sql
-        s = "SELECT * from {};".format(self.table_name)
+        s = "SELECT * from {} ORDER BY TIMESTAMP DESC LIMIT 3;".format(self.table_name)
         return self.get_execute_sql(s)
 
     def get_execute_sql(self, sql_str):
