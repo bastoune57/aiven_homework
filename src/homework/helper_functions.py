@@ -44,7 +44,7 @@ def validate_record_format(record):
     """
     try:
         data = json.loads(record)
-    except(ValueError) as error:
+    except(ValueError):
         raise Exception("The record is not from "
                 "JSON format: {}".format(record))
         return False
@@ -60,7 +60,7 @@ def validate_record_format(record):
     return True
 
 
-def validate_userId (record):
+def validate_userId(record):
     """! Function that gets the json decoded
     record to verify the userId content
 
@@ -82,7 +82,8 @@ def validate_userId (record):
         raise Exception("userId invalid value "
                 "{} (should be a positive value)".format(userId))
 
-def validate_timestamp (record):
+
+def validate_timestamp(record):
     """! Function that get the json decoded record
     to verify the timestamp content
 
@@ -100,12 +101,12 @@ def validate_timestamp (record):
                 "{} (should be a float)".format(type(timestamp)))
 
     # check timestamp is >0
-    if timestamp < 0: 
+    if timestamp < 0:
         raise Exception("timestamp invalid value "
                 "{} (should be a positive value)".format(timestamp))
 
 
-def validate_coordinates (record):
+def validate_coordinates(record):
     """! Function that get the json decoded
     record to verify the coordinates content
 
@@ -127,7 +128,7 @@ def validate_coordinates (record):
                 "{} (should be a 2)".format(len(record['coordinates'])))
 
     # get latitude
-    latitude=record['coordinates'][0]
+    latitude = record['coordinates'][0]
 
     # check latitude is a float
     if not isinstance(latitude, float):
@@ -140,7 +141,7 @@ def validate_coordinates (record):
                 "{} (should be between -90 and 90)".format(latitude))
 
     # get longitude
-    longitude=record['coordinates'][1]
+    longitude = record['coordinates'][1]
 
     # check latitude is a float
     if not isinstance(longitude, float):

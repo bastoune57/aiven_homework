@@ -8,13 +8,13 @@ INSTALL_PACKAGES = open(path.join(DIR, 'requirements.txt')).read().splitlines()
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-#read licese file for licensing info
+# read licese file for licensing info
 with open('LICENSE') as f:
     license = f.read()
 
 # setup package informations
 setuptools.setup(
-    name="homework-pkg-bastoune57", 
+    name="homework-pkg-bastoune57",
     version="0.0.1",
     author="Bastien Hamet",
     author_email="bastien.hamet@gmail.com",

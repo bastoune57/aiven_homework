@@ -128,6 +128,7 @@ The following attributions were made:
 
 ## Project next steps
 In order to continue working with this project the next steps would be to:
+* **Continous integration:** Update to the git with a runner that automatically builds and test the code, update the docs...
 * **Make a utils library:** Move all modules that are used from the different classes to a utils library.
 * **Improve integration testing:** Running a test with the full homework application and compare the generated records from the producer to the written data in the PostgreSQL database.
 * **Continuous application**: Update the application to run continuously until it is stopped. 
